@@ -26,15 +26,15 @@ namespace cmd
                 int counter = 0;
                 foreach (var item in args)
                 {
-                    if (item.ToLower() == "-out" && args[counter + 1].StartsWith("\"") && args[counter + 1].EndsWith("\""))
+                    if (item.ToLower() == "-out" )//&& args[counter + 1].StartsWith("\"") && args[counter + 1].EndsWith("\""))
                     {
                         outputPath = args[counter + 1];
                     }
-                    else
-                    {
-                        Console.WriteLine("Wrong Value For output Address!");
-                        break;
-                    }
+                    //else
+                    //{
+                    //    Console.WriteLine("Wrong Value For output Address!");
+                    //    break;
+                    //}
                     if (item.ToLower() == "-format" && (args[counter + 1].ToLower() == "zip" || args[counter + 1].ToLower() == "rar"))
                     {
                         if (args[counter + 1].ToLower() == "zip")
@@ -43,18 +43,21 @@ namespace cmd
                         if (args[counter + 1].ToLower() == "rar")
                             type = false;
                     }
-                    else
-                    {
-                        Console.WriteLine("Wrong Value For File Format, please choose [zip] or [rar]");
-                        break;
-                    }
+                    //else
+                    //{
+                    //    Console.WriteLine("Wrong Value For File Format, please choose [zip] or [rar]");
+                    //    break;
+                    //}
                     if (item.ToLower() == "-files")
                     {
                         for (int i = 1; i <= args.Length - 4; i++)
                         {
-                            if (args[counter + i].StartsWith("\"") && args[counter + i].EndsWith("\""))
+                            if (!(counter + i >= args.Length))
                             {
+                                // if (args[counter + i].StartsWith("\"") && args[counter + i].EndsWith("\""))
+                                // {
                                 files[i - 1] = args[counter + 1];
+                                // }
                             }
                             else
                             {
@@ -64,17 +67,26 @@ namespace cmd
                                     break;
                                 }
                             }
+                            
                         }
 
                     }
-                    else
-                    {
-                        Console.WriteLine("Wrong Value For File Format, please choose [zip] or [rar]");
-                        break;
-                    }
+                    //else
+                    //{
+                    //    Console.WriteLine("Wrong Value For File Format, please choose [zip] or [rar]");
+                    //    break;
+                    //}
+                    counter++;
                 }
-                counter++;
+
             }
+            Console.WriteLine(outputPath);
+            Console.WriteLine(type);
+            foreach (var item in files)
+            {
+                Console.Write(item + ", ");
+            }
+
             Console.ReadKey();
         }
 
